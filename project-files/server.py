@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, render_template, session, flash
 import requests
 import re
 from auth import auth
+from werkzeug.contrib.fixers import ProxyFix
 
 key = auth()
 
@@ -70,5 +71,9 @@ def startover():
 		session.pop('data', None)
 	return redirect('/')
 
+app.wsgi_app = ProxyFix(app.wsgi_app)
+
 if __name__ =="__main__":
-	app.run(host='0.0.0.0')
+	app.run(debug=true)
+	# if deploying:
+	# app.run(host='0.0.0.0', port=8001)
