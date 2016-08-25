@@ -22,6 +22,7 @@ def translate_process():
 		return redirect('/')
 	if request.form['title'] != '':
 		session['data']['title'] = request.form['title']
+		session['data']['titlewords'] = re.findall(r"\w+|[^\w\s]", session['data']['title'], re.UNICODE)
 	else:
 		session['data']['title'] = ''
 	session['data']['lines'] = session['data']['fullpoem'].split('\n')
