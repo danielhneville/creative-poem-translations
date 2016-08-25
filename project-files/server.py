@@ -49,7 +49,6 @@ def api_call():
 @app.route('/view/process', methods=['POST'])
 def view_process():
 	session['user_poem'] = request.form
-	print session['user_poem']
 	return redirect('/view')
 
 @app.route('/view')
@@ -58,10 +57,8 @@ def view():
 	ulines = []
 	for idx in range(len(session['user_poem'])-1):
 		ulines.append(session['user_poem'][str(idx)])
-	print ulines
 	title = session['data']['title']
 	lines = session['data']['lines']
-	print lines
 	return render_template('view.html', utitle=utitle, ulines=ulines, title=title, lines=lines)
 
 @app.route('/startover', methods=['POST'])
