@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Gained in Translation</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row bg-blue">
+			<header class="col-md-12">
+				<h1>Gained in Translation</h1>
+			</header>
+		</div>
+		<div class="row space-before">
+			<article class="col-xs-12 col-sm-6"> 
+				<p class="center-block">Creatively translate poems from Spanish to English in a line-by-line format with word-by-word Spanish to English translations provided by the Collins Spanish to English Dictionary.</p>
+				<form class="space-before" action="/translate/process" method="POST">
+					<div class="form-group">
+						<label class="sr-only" for="title">Title of Poem</label>
+						<input class="form-control" type="text" name="title" id="title" placeholder="Paste the poem's title here (optional).">
+					</div>
+					<div class="form-group">
+						<label class="sr-only" for="poem">Poem</label>
+						<textarea class="form-control" type="text" name="poem" id="poem" placeholder="Paste the poem here. Be sure that each line is on a new line." rows="12"></textarea>
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-block" value="Translate">
+					</div>
+				</form>
+			</article>
+			<div class="hidden-xs col-sm-6">
+				<img class="center-block img-responsive" src="https://upload.wikimedia.org/wikipedia/commons/8/86/Pablo_Neruda_%281966%29.jpg" alt="Pablo Neruda">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

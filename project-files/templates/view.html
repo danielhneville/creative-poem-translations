@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Gained in Translation</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row bg-blue">
+			<header class="col-md-12">
+				<h1>Gained in Translation</h1>
+			</header>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				<h1>{{ utitle }}</h1>
+				{% for line in ulines %}
+					<p>{{ line }}</p>
+				{% endfor %}
+			</div>
+			<div class="col-sm-12 col-md-6">
+				<h1>{{ title }}</h1>
+				{% for line in lines %}
+					<p>{{ line }}</p>
+				{% endfor %}
+			</div>	
+		</div>
+		<div class="row space-before">
+			<div class="col-xs-12 text-center">
+				<form action="/startover" method="POST">
+					<input type="submit" class="btn btn-lg" value="Translate Again">
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
