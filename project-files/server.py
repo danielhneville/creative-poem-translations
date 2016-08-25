@@ -1,6 +1,9 @@
 from flask import Flask, request, redirect, render_template, session, flash
 import requests
 import re
+from auth import auth
+
+key = auth()
 
 app = Flask(__name__)
 app.secret_key = 'pablonerudawaspoisoned'
@@ -38,7 +41,7 @@ def api_call():
 	headers = {
 		'Host': '127.0.0.1:5000',
 		'Accept': 'application/json',
-		'accessKey': 'YOUR-ACCESS-KEY'
+		'accessKey': key.accessKey
 	}
 	response = requests.get(url, headers=headers).content
 	return response
