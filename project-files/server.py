@@ -13,7 +13,7 @@ def index():
 	return render_template('index.html')
 
 @app.route('/translate/process', methods=['POST'])
-def api_translate():
+def translate_process():
 	session['data'] = {}
 	if request.form['poem'] != '':
 		session['data']['fullpoem'] = request.form['poem']
