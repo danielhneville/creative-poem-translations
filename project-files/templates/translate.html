@@ -18,7 +18,11 @@
 		<form action="/view/process" method="POST">
 			<div class="row">
 				<div class="col-xs-12 col-sm-8 col-md-6">
-					<h1><span word="{{ poem['title'] }}">{{ poem['title'] }}</span></h1>
+					<h1>
+					{% for word in poem['titlewords'] %}
+						<span word="{{ word }}">{{ word }}</span>
+					{% endfor %}
+					</h1>
 					<div class="form-group">
 						<label class="sr-only" for="title">Translate the title here</label>
 						<input class="form-control" type="text" name="title" id="title" placeholder="Write your translation here">
