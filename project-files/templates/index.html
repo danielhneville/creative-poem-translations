@@ -29,6 +29,13 @@
 						<input class="form-control" type="text" name="title" id="title" placeholder="Paste the poem's title here (optional).">
 					</div>
 					<div class="form-group">
+						{% with messages = get_flashed_messages() %}
+							{% if messages %}
+								{% for msg in messages %}
+									<p class="text-danger">{{ msg }}</p>
+								{% endfor %}
+							{% endif %}
+						{% endwith %}
 						<label class="sr-only" for="poem">Poem</label>
 						<textarea class="form-control" type="text" name="poem" id="poem" placeholder="Paste the poem here. Be sure that each line is on a new line." rows="12"></textarea>
 					</div>
