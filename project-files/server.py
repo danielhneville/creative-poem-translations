@@ -74,6 +74,6 @@ def startover():
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
 if __name__ =="__main__":
-	app.run(debug=true)
+	app.run(debug=True)
 	# if deploying:
 	# app.run(host='0.0.0.0', port=8001)
