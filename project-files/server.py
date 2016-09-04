@@ -40,7 +40,7 @@ def translate():
 def api_call():
 	word = request.form['word']
 	headers = {
-		'Host': '127.0.0.1:5000',
+		'Host': 'www.translate.demodaniel.com',
 		'Accept': 'application/json',
 		'accessKey': key.accessKey
 	}
@@ -57,6 +57,14 @@ def api_call():
 			entries.append(response['entryContent'])
 		return jsonify(result=entries)
 	else:
+		did_you_mean = 'https://api.collinsdictionary.com/api/v1/dictionaries/spanish-english/search/didyoumean/?q=' + word + '&entrynumber=5'
+		alts = requests.get(did_you_mean, headers=headers).json()
+		options = []
+		if len(alts['suggestions']) > 0:
+			options.append('<h1>Not found. Try:</h1>')
+			for alt in alts['suggestions']:
+				options.append('<p><span word="' + alt + '">' + alt + '</span></p>')
+			return jsonify(result=options)
 		return jsonify(result=False)
 
 @app.route('/view/process', methods=['POST'])

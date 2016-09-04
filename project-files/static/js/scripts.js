@@ -1,10 +1,7 @@
 $(document).ready(function(){
 
-	$('span').on('click', function(){
-		$('.translate').html(function(){
-			var str = '<div class="uil-magnify-css" style="transform:scale(0.6);"><div class="group"><div class="grip"></div><div class="inner-circle"></div><div class="outer-circle"></div></div></div>';
-			return str;
-		}); 
+	$(document).on('click', 'span', function(){
+		$('.translate').html('<div class="uil-magnify-css" style="transform:scale(0.6);"><div class="group"><div class="grip"></div><div class="inner-circle"></div><div class="outer-circle"></div></div></div>');
 		var object = { 'word': $(this).attr('word') };
 		$.post('/api_call', object, function(res){
 			if (res.result){
