@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, session, flash
+from flask import Flask, request, redirect, render_template, session, flash, jsonify
 import requests
 import re
 from auth import auth
@@ -39,14 +39,33 @@ def translate():
 @app.route('/api_call', methods=['POST'])
 def api_call():
 	word = request.form['word']
-	url = 'https://api.collinsdictionary.com/api/v1/dictionaries/spanish-english/search/first/?q=' + word + '&format=html'
 	headers = {
-		'Host': '127.0.0.1:5000',
+		'Host': 'www.translate.demodaniel.com',
 		'Accept': 'application/json',
 		'accessKey': key.accessKey
 	}
-	response = requests.get(url, headers=headers).content
-	return response
+	search_url = 'https://api.collinsdictionary.com/api/v1/dictionaries/spanish-english/search/?q=' + word
+	search_response = requests.get(search_url, headers=headers).json()
+	if len(search_response['results']) > 0:
+		results = []
+		entries = []
+		for result in search_response['results']:
+			results.append(result['entryId'])
+		for entry_id in results:
+			url = 'https://api.collinsdictionary.com/api/v1/dictionaries/spanish-english/entries/' + entry_id
+			response = requests.get(url, headers=headers).json()
+			entries.append(response['entryContent'])
+		return jsonify(result=entries)
+	else:
+		did_you_mean = 'https://api.collinsdictionary.com/api/v1/dictionaries/spanish-english/search/didyoumean/?q=' + word + '&entrynumber=5'
+		alts = requests.get(did_you_mean, headers=headers).json()
+		options = []
+		if len(alts['suggestions']) > 0:
+			options.append('<h1>Not found. Try:</h1>')
+			for alt in alts['suggestions']:
+				options.append('<p><span word="' + alt + '">' + alt + '</span></p>')
+			return jsonify(result=options)
+		return jsonify(result=False)
 
 @app.route('/view/process', methods=['POST'])
 def view_process():
