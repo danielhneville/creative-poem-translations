@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, session, flash
+from flask import Flask, request, redirect, render_template, session, flash, jsonify
 import requests
 import re
 from auth import auth
@@ -39,14 +39,26 @@ def translate():
 @app.route('/api_call', methods=['POST'])
 def api_call():
 	word = request.form['word']
-	url = 'https://api.collinsdictionary.com/api/v1/dictionaries/spanish-english/search/first/?q=' + word + '&format=html'
 	headers = {
 		'Host': '127.0.0.1:5000',
 		'Accept': 'application/json',
 		'accessKey': key.accessKey
 	}
-	response = requests.get(url, headers=headers).content
-	return response
+	search_url = 'https://api.collinsdictionary.com/api/v1/dictionaries/spanish-english/search/?q=' + word
+	search_response = requests.get(search_url, headers=headers).json()
+	if len(search_response['results']) > 0:
+		results = []
+		entries = []
+		for result in search_response['results']:
+			results.append(result['entryId'])
+		for entry_id in results:
+			print entry_id
+			url = 'https://api.collinsdictionary.com/api/v1/dictionaries/spanish-english/entries/' + entry_id
+			response = requests.get(url, headers=headers).json()
+			entries.append(response['entryContent'])
+		return jsonify(result=entries)
+	else:
+		return False
 
 @app.route('/view/process', methods=['POST'])
 def view_process():
