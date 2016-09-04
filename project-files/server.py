@@ -52,13 +52,12 @@ def api_call():
 		for result in search_response['results']:
 			results.append(result['entryId'])
 		for entry_id in results:
-			print entry_id
 			url = 'https://api.collinsdictionary.com/api/v1/dictionaries/spanish-english/entries/' + entry_id
 			response = requests.get(url, headers=headers).json()
 			entries.append(response['entryContent'])
 		return jsonify(result=entries)
 	else:
-		return False
+		return jsonify(result=False)
 
 @app.route('/view/process', methods=['POST'])
 def view_process():

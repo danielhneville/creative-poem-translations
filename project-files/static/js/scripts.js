@@ -7,7 +7,7 @@ $(document).ready(function(){
 		}); 
 		var object = { 'word': $(this).attr('word') };
 		$.post('/api_call', object, function(res){
-			if (res){
+			if (res.result){
 				$('.translate').html('');
 				for (var i = 0; i < res.result.length; i++){
 					var htmlstr = res.result[i];
