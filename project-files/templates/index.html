@@ -26,6 +26,23 @@
 				<p class="center-block">Creatively translate poems from Spanish to English in a line-by-line format with word-by-word Spanish to English translations provided by the Collins Spanish to English Dictionary.</p>
 				<form class="space-before" action="/translate/process" method="POST">
 					<div class="form-group">
+						<input type="hidden" name="title" value="Juventud">
+						<input type="hidden" name="poem" value="Un perfume como una ácida espada
+						de ciruelas en un camino,
+						los besos del azúcar en los dientes,
+						las gotas vitales resbalando en los dedos,
+						la dulce pulpa erótica,
+						las eras, los pajares, los incitantes
+						sitios secretos de las casas anchas,
+						los colchones dormidos en el pasado, el agrio valle verde
+						mirado desde arriba, desde el vidrio escondido: 
+						toda la adolescencia mojándose y ardiendo 
+						como una lámpara derribada en la lluvia.">
+						<input type="submit" class="btn btn-block" value='Try "Juventud" by Pablo Neruda'>
+					</div>
+				</form>
+				<form class="space-before" action="/translate/process" method="POST">
+					<div class="form-group">
 						<label class="sr-only" for="title">Title of Poem</label>
 						<input class="form-control" type="text" name="title" id="title" placeholder="Paste the poem's title here (optional).">
 					</div>
