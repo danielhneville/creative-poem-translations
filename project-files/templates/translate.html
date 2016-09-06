@@ -34,15 +34,19 @@
 			<div class="row space-before">
 				<div class="col-sm-12 col-md-6">
 				{% for idx in range(length) %}
-				<p>
-					{% for word in poem['wordlists'][idx] %}
-					<span word="{{ word }}">{{ word }}</span>
-					{% endfor %}
-				</p>
-				<div class="form-group">
-					<label class="sr-only" for="{{ idx }}">Write your translation here</label>
-					<input class="form-control" type="text" name="{{ idx }}" id="{{ idx }}" placeholder="Write your translation here">
-				</div>
+					{% if poem['wordlists'][idx][0] == 'stanza_break' %}
+						<p class="invisible"><input type="hidden" name="{{ idx }}" value="stanza_break">stanza_break</p>
+					{% else %}
+						<p>
+							{% for word in poem['wordlists'][idx] %}
+								<span word="{{ word }}">{{ word }}</span>
+							{% endfor %}
+						</p>
+						<div class="form-group">
+							<label class="sr-only" for="{{ idx }}">Write your translation here</label>
+							<input class="form-control" type="text" name="{{ idx }}" id="{{ idx }}" placeholder="Write your translation here">
+						</div>
+					{% endif %}
 				{% endfor %}
 				</div>
 				<div class="hidden-xs hidden-sm col-md-6">

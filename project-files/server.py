@@ -29,7 +29,10 @@ def translate_process():
 	session['data']['lines'] = session['data']['fullpoem'].split('\n')
 	session['data']['wordlists'] = []
 	for line in session['data']['lines']:
-		session['data']['wordlists'].append(re.findall(r"\w+|[^\w\s]", line, re.UNICODE))
+		if line == '\r' or line == '\n':
+			session['data']['wordlists'].append([u'stanza_break'])
+		else:
+			session['data']['wordlists'].append(re.findall(r"\w+|[^\w\s]", line, re.UNICODE))
 	return redirect('/translate')
 
 @app.route('/translate')
