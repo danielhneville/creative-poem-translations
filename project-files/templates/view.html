@@ -26,7 +26,11 @@
 				<h1>{{ utitle }}</h1>
 				<p>
 				{% for line in ulines %}
-					{{ line }}
+					{% if line == 'stanza_break' %}
+						<br />
+					{% else %}
+						{{ line }}<br />
+					{% endif %}
 				{% endfor %}
 				</p>
 			</div>
@@ -34,7 +38,11 @@
 				<h1>{{ title }}</h1>
 				<p>
 				{% for line in lines %}
-					{{ line }}
+					{% if line == '\r' or line == '\n' %}
+						<br />
+					{% else %}
+						{{ line }}<br />
+					{% endif %}
 				{% endfor %}
 				</p>
 			</div>	
